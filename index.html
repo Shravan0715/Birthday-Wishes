@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Love Login by shriii</title>
+    <title>Birthday Wishes From Your Husband...!🖤</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
@@ -96,7 +96,7 @@
 </head>
 <body>
     <form id="login-form">
-        <label for="code">Enter Your Name:</label>
+        <label for="code">Enter Your Love Code:</label>
         <input type="text" id="code" name="code" placeholder="Your Name">
         <button id="submit-btn">Login</button>
     </form>
@@ -107,14 +107,14 @@
         const submitBtn = document.getElementById('submit-btn');
         const resultDiv = document.getElementById('result');
 
-        const secretCode = 'Sumitra'; // Replace with your secret code
+        const secretCode = '43656'; // Replace with your secret code
         const nextPageUrl = 'main.html'; // Replace with the URL of the new page
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const userInput = codeInput.value.trim();
             if (userInput === secretCode) {
-                resultDiv.innerHTML = 'Baby';
+                resultDiv.innerHTML = 'aieee...! nan Muddu Hendthi🖤';
                 window.location.href = nextPageUrl; // Redirect to new page
             } else {
                 resultDiv.innerHTML = 'Ninu nan muddu Hendthi ala nan muddu Hendthi eli?';
@@ -123,7 +123,7 @@
 
         // Function to create falling emojis
         function createFallingEmoji() {
-            const emojis = ['❤️', '💖', '💘', '💕', '💞', '💓', '💗', '😍'];
+            const emojis = ['❤️', '💖', '💘', '💕', '🖤', '💓', '💗', '😍'];
             const emoji = document.createElement('div');
             emoji.classList.add('falling-emoji');
             emoji.innerText = emojis[Math.floor(Math.random() * emojis.length)];
