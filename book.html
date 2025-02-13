@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nan Muddu Hendathi ge</title>
+     <style>
+      * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background-image: radial-gradient(
+      circle farthest-corner at 50% 50%,
+      hsl(187 20% 88%) 30%,
+      hsl(149 20% 94%) 100%
+  );
+}
+
+.book {
+  position: relative;
+  display: flex;
+  margin: auto;
+  width: 42cqmin; /* Increased width */
+  pointer-events: none;
+  transform-style: preserve-3d;
+  transition: translate 1s;
+  translate: calc(min(var(--c), 1) * 50%) 0%;
+  rotate: 1 0 0 30deg;
+}
+
+.page {
+  --thickness: 4;
+  flex: none;
+  display: flex;
+  width: 100%;
+  font-size: 2.2cqmin; /* Slightly increased font size */
+  pointer-events: all;
+  user-select: none;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 1s,
+      rotate 1s ease-in calc((min(var(--i), var(--c)) - max(var(--i), var(--c))) * 50ms);
+  translate: calc(var(--i) * -100%) 0px 0px;
+  transform: translateZ(calc((var(--c) - var(--i) - 0.5) * calc(var(--thickness) * 0.23cqmin)));
+  rotate: 0 1 0 calc(clamp(0, var(--c) - var(--i), 1) * -180deg);
+}
+
+.front,
+.back {
+  position: relative;
+  flex: none;
+  width: 100%;
+  backface-visibility: hidden;
+  overflow: hidden;
+  background-color: #fff;
+  translate: 0px;
+}
+
+.back {
+  translate: -100% 0;
+  rotate: 0 1 0 180deg;
+}
+
+.book {
+  counter-reset: page -1;
+}
+
+.book a {
+  color: inherit;
+}
+
+.page {
+  box-shadow: 0em 0.5em 1em -0.2em #00000020;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  padding: 2em;
+  border: 1px solid #0002;
+}
+
+.front:has(img),
+.back:has(img) {
+  padding: 0;
+}
+
+.front img,
+.back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.front::after,
+.back::after {
+  position: absolute;
+  bottom: 1em;
+  counter-increment: page;
+  content: counter(page) ".";
+  font-size: 0.8em;
+}
+
+.cover::after {
+  content: "";
+}
+
+.front::after {
+  right: 1em;
+}
+
+.front {
+  background: linear-gradient(to left, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.1em 0.5em 0.5em 0.1em;
+}
+
+.back::after {
+  left: 1em;
+}
+
+.back {
+  background-image: linear-gradient(to right, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.5em 0.1em 0.1em 0.5em;
+}
+
+.cover {
+  background: radial-gradient(
+          circle farthest-corner at 80% 20%,
+          hsl(150 80% 20% / 0.3) 0%,
+          hsl(170 60% 10% / 0.1) 100%
+      ),
+      hsl(231, 32%, 29%) url("./cover.jpg") 50% / cover;
+  color: hsl(0, 100%, 30%); /* Dark red text color for cover page */
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 1px;
+  color: hsl(0, 100%, 30%); /* Dark red heading color */
+}
+
+p {
+  margin-top: 1px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  color: hsl(0, 100%, 30%); /* Dark red text color for paragraphs */
+}
+
+.front,
+.back {
+  padding: 1.5em;
+  color: hsl(0, 100%, 30%); /* Dark red text color for front and back pages */
+}
+
+.book {
+  width: 40cqmin; /* Slightly increased width */
+}
+
+.page {
+  font-size: 2cqmin; /* Slightly increased font size */
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1.5em;
+}
+
+h2 {
+  margin-bottom: 5px;
+}
+
+p {
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background: linear-gradient(to right, #ff7eb9, #ff65a3, #ff165d);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Emoji Animation */
+.emoji {
+  position: absolute;
+  font-size: 3rem;
+  opacity: 0;
+  animation: floatEmojis 6s ease-in-out infinite;
+}
+
+@keyframes floatEmojis {
+  0% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-100px) rotate(20deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+}
+
+/* Add random timing for each emoji */
+.emoji:nth-child(1) {
+  animation-delay: 0s;
+  left: 10%;
+}
+.emoji:nth-child(2) {
+  animation-delay: 1s;
+  left: 20%;
+}
+.emoji:nth-child(3) {
+  animation-delay: 2s;
+  left: 30%;
+}
+.emoji:nth-child(4) {
+  animation-delay: 3s;
+  left: 40%;
+}
+.emoji:nth-child(5) {
+  animation-delay: 4s;
+  left: 50%;
+}
+.emoji:nth-child(6) {
+  animation-delay: 5s;
+  left: 60%;
+}
+.emoji:nth-child(7) {
+  animation-delay: 6s;
+  left: 70%;
+}
+.emoji:nth-child(8) {
+  animation-delay: 7s;
+  left: 80%;
+}
+.emoji:nth-child(9) {
+  animation-delay: 8s;
+  left: 90%;
+}
+
+
+
+     </style>
+  </head>
+  <body>
+    <div class="book">
+      <div class="page">
+        <div class="front cover">
+          <h1
+            style="
+              color: rgb(255, 255, 255);
+              text-shadow: 5px 2px 5px rgb(0, 0, 0);
+            "
+          >
+          "ನಿನ್ನ ಪ್ರೀತಿಯ ಹನಿಗಳು" 💖📖<br>
+
+
+          </h1>
+
+          <p
+            style="
+              color: rgb(255, 255, 255);
+              text-shadow: 5px 2px 5px rgb(0, 0, 0);
+            "
+          >
+          2022 - still more.<br /><h1></h1>
+          </p>
+        </div>
+        <div class="back">
+          <h2>A Special Beginning ❤️✨</h2>
+
+       <p>Nana Muddu Peddu Hendathi ge ! elinda shuru madli endu thilithila.. sari ivthu nin Huttida habba adke alindane shuru madona , ನಿನ್ನ ಜನ್ಮದಿನದ ಈ ಶುಭ ದಿನ,
+        ಹೃದಯದಿಂದ ಹರಿದು ಬರುವ ವಚನ।<br>
+        ನಿನ್ನ ಸಾಥಿ ನನ್ನ ಜೀವನ,<br>
+        ನೀನೇ ನನ್ನ ಬೆಳಕು, ನೀನೇ ಕನಸುಗಳ ಮನ॥<br>
+        
+        ಹನಿಗಳ ಹಿಂಗಾರ, ಮಳೆಯ ಸ್ಪರ್ಶ,<br>
+        ನಿನ್ನ ಪ್ರೀತಿ ನನ್ನ ಬಾಳು ತುಂಬಾ ಸರಸ।<br>
+        ನಗುವ ಬೆಳಗಾಗಿ ಇರಲು ಸದಾ,<br>
+        ಹರುಷ ತುಂಬಲಿ ನಿನ್ನ ಬದುಕಿನ ಗದಾ॥<br>
+        
+        ನಿನ್ನ ಕನಸುಗಳಿಗೆ ನನಸು ಸಿಗಲಿ,<br>
+        ಪ್ರೇಮದ ಬೆಳಕು ಎಂದೆಂದಿಗೂ ಹೊಳೆಯಲಿ।<br>
+        ಜೀವನ ಸಾಗರದ ಒಡಲಿನಲ್ಲಿ,<br>
+            ನೀನು ಸದಾ ನನ್ನ ಪ್ರೇಮದ ಹೂವಾಗಿ ಮಿಗಲಿ॥<br>
+        
+        <h3>ಜನ್ಮದಿನದ ಹಾರ್ದಿಕ ಶುಭಾಶಯಗಳು, ಪ್ರೀತಿಯೆ! 💖🫀 
+        ಓಹ್ ನನ್ನ ಮುದ್ದು ಹೆಂಡ್ತಿಯೆ!💖</h3></p>
+
+         
+        </div>
+      </div>
+      <!--2nd page-->
+      <div class="page">
+        <div class="front">
+          <h2>From Strangers to Something Special ❤️✨</h2>
+          <p>
+            Nan nin modal beti... the one beautiful day 😍Nan first nodide nin kanuu Banagaraa 🖤enoo adan nenaskondree ne nang inuu  same feel baruth maa🫀Nan ankondila avth nav ist dodda journey valg kal idthevi anthaa..🖤really aa dinaak na inu devarige Thanks heltheni maa🫀🖤yak andree avth nin nan life valg kal iti maa🖤🫀andinida illi varguu 🖤Nan life valg modal enar agirbodu but ni band adan yala change madidi maa🫀🖤the pain I had the loneliness I had 🫀avag nang yaru ila andag 🖤Nan ididni anth heli 🫀Nan life valg kal itti maaa ninu🖤🧿I am really soo soo soo much Happy Banagaraa 🖤🫀Nang en heli anth gotha agathilaa 🖤🧿But vnd en andree🫀I really Loveeee youuu soo sooo soo soo much kane nan muddu pedduuu Hendthi 🖤🧿
+          </p>
+        </div>
+        <div class="back">
+          <img src="./1.jpg" alt="Img 1" />
+        </div>
+      </div>
+      <!--3rd page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Magic of You ✨💖</h2>
+          <p>
+            The magic of you yak gothaa maa🖤?? <br>
+
+Nin band mele nan intra agiro changes nan life nali agiro vnd astu beautiful moments yala nodidree 🧿🖤Nange nin bitu bere baduke ila anth ansuth maa🖤and nin nange nan life bagge heli koti ...eee world valg heng badak beku anth heli koti maaa🧿jeevana andree enu anth heli koti maaa🖤🫀Nan Bagee enu anth nang goth ididila maa🖤Life na inguu enjoy madboudu anth anod heli koti maaa🧿🫀 especially nam manyag heng opkondroo nange inuu shock idee maaa🖤🧿Andree ninu nang aste ala maa🖤Nam manyag nu magic madi maaa,🧿🫀Nind kindness😍 nind caring 🖤🧿Ninn aaa maturity 🫀hentha situation bandruu easy agi face madbodu anodana thilisi koti maaa nin nange🧿🖤Nin  Bageee heltha hodreee mugiyode ilaa Bangara 🧿🖤... eeee book salalaa maaa....🧿🖤
+          </p>
+        </div>
+        <div class="back">
+          <h2>The Strength Within You 💫✨</h2>
+          <p>
+            Nine nan strength and nine nan weeknesss maa🖤🫂Nine ilde iroi jeevana nanu uheee kuda madkondilaa maa🫀🧿ada ene adruu nin nan padkonde padkotheni...🫂🖤Nanggg bekuu andree beku ninu🧿🫂Nin nan jothe idre en bek adru madboudu maa🖤🧿Nam life nali en eno agirboudu maa🖤but navu avnelaa sari madkond munde hogonaa maa🫂🧿Nangeee bek agiroduu ninu🫂🖤Nam naduvee eneee agirbodudu maa🖤🫂But at last I need you at any cost ...🖤Thappa agodu sahajaa  maa🖤aa thappna navu vopkondu mundee hogonaa maa🫂🖤Nang bekuu maaa ninuuu🧿🖤🫂Nin yavaglu Happy agi irbeku maaa 🖤🫂Your Happiness is mine Banagaraa 🫀🖤Nin yavaglu kushi indaa irbekuu maaa.....🫂
+          </p>
+        </div>
+      </div>
+      <!--4th page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Best Part of My Life🤞💖</h2>
+          <p>
+            Best Part of my life... andre adu Ninuuu Banagaraa 🖤Nine nana badukindaa amulyavada vnd kashana 🧿🫂Nin sikiroduu 🖤nan punyaa maa🧿🫀Nijaa ni nang sigbeku andree adu nan luck maa🖤🫂Nin band mele nand life style nan yala change athu maa🖤🫀aaa seriousness ni nang thilisikoti maa🖤🫂Nijaa nin irodak maa naa🖤na ista responsibility agirodu..🖤 family importance en antha heli koti maa...🧿🫀Ni nang sikida nang nan best part of my life Banagaraa 🖤Nan muddu Hendthi 🫀🧿I really need this part to be forever with me .....🖤
+          </p>
+        </div>
+        <div class="back">
+          <img src="./2.jpg" alt="Img 1" />
+        </div>
+      </div>
+      <!--5th page-->
+      <div class="page">
+        <div class="front">
+          <h1>A Wish from the Heart 💫💖</h1>
+          <p>
+     <h3>ಈ ನನ್ನ ಮಸಿಗೆ, ಮನಸಿನಿಂದ ಶುಭಾಶಯಗಳನ್ನು ತಿಳಿಸುತ್ತೇನೆ!" 🫀🧿</h3><br>
+           "ಒಹ್ ನನ್ನ ಮುದ್ದು ಮನಸೀ...! 💖🧿"<br>  
+        ನಿನ್ನಷ್ಟು ಸುಂದರ ನಿನ್ನ ಮನಸು, <br>
+              ನಮ್ಮ ಮಧ್ಯೆ ಇರಬಹುದು ಸಾಕಷ್ಟು ಮುನಿಸು...🧿🫀<br> 
+            ಪ್ರೀತಿಯಿಂದ ನಿನಲಿ ಕೇಳಿಕೊಳ್ಳುವೆನು,<br>  
+              ಸದ್ಯವಾದರೆ ನನ್ನನ್ನು ಮನ್ನಿಸು...🖤<br>  
+              ನಿನ್ನ ಜೊತೆಗೆ ಭಾಳಿ ಬದುಕುವುದು ನನ್ನ ಕನಸು...🫂🧿<br><br>         ನನ್ನ ಮುದ್ದು ಮನಸಿಗೆ – ಮನಸಿನಿಂದ ಹುಟ್ಟು ಹಬ್ಬದ ಶುಭಾಶಯಗಳು!** 🎉💖 
+          </p>
+        </div>
+        <div class="back">
+          <h1>Always Here for You 💖✨</h1>
+          <p>
+            🫂 Nan nin jothe yavagluu idee irtheni maaa🖤🧿No matter wat Happes eee nin muddu Ganda yavathu nin jothe ne irthane Banagaraa🖤🧿 Nin hind na yavg idde irtheni maa,🧿🖤Yen adru ene bitruu nin jothe nan yavaglu niltheni maa🧿🖤not only in your happiness nin kasta kaladli kuda nan nin jothe idee irtheni maaa🧿🫂Ninge yavaglu nan support ide iruth maa🖤Nin yavaglu kushi inda irbeku maa🧿🫂adagosakar en madak nu ready maa🖤🧿Nin happy agi nodkolodu nan jawabdari maa🖤🫂Even I feel Happy when you are Happy Banagraaa 🖤🧿,... At last I need to say you is....Nin muddu Ganda yavaglu nin jothe ide irthane maaa🫂🖤 
+          </p>
+        </div>
+      </div>
+      <div class="page">
+        <div class="front">
+          <h2>Grateful for You🌹🖤</h2>
+          <p>
+            Nan Ning modlinda ilivargu yast preeti koteno gothilaa maa🖤🫂but I will try my level best to give you lots of love 🫀and I always appreciate you for what you are and...🖤yast helidruu mugiylaa maa nin Bagee.🖤Nina aa caring , aa kindness, and nin situu..,🖤aaa sitin hinde iruvaa...🖤kalaji...🫂Yavathu nane bekuu yenuva nin manasu🖤🫀I will always make efforts to keep you Happy 🫂and make you feel special Banagaraa 🖤🫀Yak andre...🌍🫂nin nang ene agirbodudu nan muddu Hendthi yala agirbodudu 🖤🫀But You are always my SPECIALONE💕🌍 Banagaraa 🫀🖤Form the day one till now..🖤and still  more forever maa🌍🧿Nanggg bekuuuu ninuuu,🌍🖤You are always a special for me Banagaraa 🧿
+          </p>
+        </div>
+        <div class="back">
+          <h2>Will You Be Mine? ❤️✨</h2>
+        <p>Eee question ge shock agbeda maa🖤🧿Nanggg gothuuu nin yavagluu nanavle ..anduu induuu endenduu🖤🌍ninu nanna
+          avale...,🫂ida yak andree parthi sari nin nang beku endang nin nang reply madthi ala... aaa reply goskara
+          maaa,🖤🌍aaa reply kelidag nang eno vanthara mast ansuth maa🫂🖤Thumbaaa preethi madtheni kane
+          ninaaa...🥺🫂Nin ilade bititalare vndu kashanaa..🖤🥺Nin bekendu hamblisuvudu ee nan mana🫂🖤Nine bek enduuu
+          bedilkoluvee devarli dinaaa....🫂🫀<br><br>
+
+
+            At last ida ning ingu bday wishes thilsboduu anth vnd san parythana maa🖤🫂Nanggg bekuuu Banagaraa Ninuuu 🖤🫀Love you Jaasti Banagraaa intra start agi ivag....🖤🫂 Love you jaasti kintra jaastii jaasti jaasti kane nan muddu Hendthi 🫀🖤🌍varigu bandide...🖤iduu inuu jaasti jaasti agli anth bedkontheni Bangaraa 🌍
+            
+            
+            Will you marry me? 💖💕 </p>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="front">
+          <img src="./4.png" alt="Img 1" />
+        </div>
+        <div class="back cover">
+          <h3>ನನ್ನ ಮುದ್ದು ಹೆಂಡ್ತಿ🖤🫂</h3>
+          <p>
+            "ಪ್ರೀತಿ, ನಂಬಿಕೆ, ಮತ್ತು ಒಡನಾಟದ ಹನಿಗಳು ಒಂದಾಗಿಸಿದ ಈ ಸಂಗ್ರಹ, ಹೃದಯದಾಳದಿಂದ ಹರಿದ ಮಾತುಗಳ ಪ್ರತಿಬಿಂಬ. ಈ ಪ್ರೀತಿಯ ಹೆಜ್ಜೆಗುರುತು ಸದಾ ನಮ್ಮ ಜೊತೆಯಿರಲಿ"🖤🫂<br /><a
+              href=""
+              target="_blank"
+              rel="nofollow"></a>
+
+            <br />
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="emoji">❤️‍🔥</div>
+<div class="emoji">🫶🏻</div>
+<div class="emoji">❤️</div>
+<div class="emoji">😘</div>
+<div class="emoji">👨‍❤️‍💋‍👨</div>
+<div class="emoji">💓</div>
+<div class="emoji">❣️</div>
+<div class="emoji">💘</div>
+<div class="emoji">💖</div>
+<div class="emoji">💙</div>
+<div class="emoji">💚</div>
+<div class="emoji">🥰</div>
+<div class="emoji">💗</div>
+
+<script>
+  const flipBook = (elBook) => {
+    elBook.style.setProperty("--c", 0); // Set current page
+    elBook.querySelectorAll(".page").forEach((page, idx) => {
+      page.style.setProperty("--i", idx);
+      page.addEventListener("click", (evt) => {
+        if (evt.target.closest("a")) return;
+        const curr = evt.target.closest(".back") ? idx : idx + 1;
+        elBook.style.setProperty("--c", curr);
+      });
+    });
+  };
+  
+  document.querySelectorAll(".book").forEach(flipBook);
+  
+</script>
+ 
+  </body>
+</html>
+
